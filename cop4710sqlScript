@@ -1,0 +1,45 @@
+CREATE TABLE Enjoyer(nid INTEGER,
+						privilege char(15),
+						email char(100),
+						password char(50),
+						RSOAffiliations integer, --list of integers
+						uid integer,
+						name char(100),
+						primary key (eid),
+						foreign key (rsoaffiliations) references RSO,
+						foreign key (uid) references university)
+
+create table university(uid integer,
+						name char(200),
+						location char(300),
+						description char(1000),
+						number_of_students integer,
+						pictures longblob,
+						primary key uid)
+
+create table event(eid integer,
+					category char(300),
+					description char(2000),
+					time char(50),
+					date char(50),
+					phone char(20),
+					email char(100),
+					name char(200),
+					rating double
+					primary key eid)
+
+--weak entity comments
+create table comments(cid integer,
+						eid integer,
+						nid integer,
+						date char(50),
+						primary key cid,
+						foreign key (eid) references event,
+						foreign key (nid) references enjoyer)
+
+create table rso( rid integer,
+					number_of_members integer,
+					events integer, --list of integers
+					name char(200),
+					primary key rid,
+					foreign key (eid) references event)
