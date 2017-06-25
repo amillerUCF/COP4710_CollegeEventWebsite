@@ -1,94 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
     
-  <title>Your Events</title>
+    <title>Your Events</title>
   
-  <!-- Bootstrap core CSS -->
-  <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
     
-  <!-- Custom styles for this template -->
-  <style>
-    .wrapper {
-        margin-left: auto;
-        margin-right: auto;
-        width: 960px;
-    }
-  
-    .navbar-inverse {
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
-    
-    .list-group {
-        background-color: lavender;
-    }
-    
-    .list-group-item-heading {
-        background-color: lavender;
-        text-align: center;
-    }
-    
-    .list-group-item-text {
-        background-color: lavenderblush;
-        text-align: center;
-    }
-    
-    button {
-      background: none repeat scroll 0 0 #4286f4;
-      border-radius: 50%;
-      color: #4286f4;
-      height: 40px;
-      width: 40px;
-      position: fixed;
-    }
-  </style>
-  </head>
+    <!-- Custom styles for this template -->
+    <style>
+        .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            width: 960px;
+        }
+      
+        .navbar-inverse {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+        
+        .list-group {
+            background-color: lavender;
+        }
+        
+        .list-group-item-heading {
+            background-color: lavender;
+            text-align: center;
+        }
+        
+        .list-group-item-text {
+            background-color: lavenderblush;
+            text-align: center;
+        }
+        
+        button {
+            margin-left: 20px;
+            background: none repeat scroll 0 0 #f9fafc;
+            border-radius: 10%;
+            color: #4286f4;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
 <body>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">&#9776;</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">&#9776;</a>
+    <!-- Page Header -->
+    <div class="col-xs-0">
+        <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon-plus"></span>
+        </button>
+        <h1 align="center">Your Events</h1>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-    </ul>
-  </div>
-</nav>
 
-<div class="event-header">
-    <h1 align="center">Your Events</h1>
-</div>
-
-<div class="list-group">
-
-  <!--<a href="#" class="list-group-item active">-->
-  <a href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">Event 1</h4>
-    <p class="list-group-item-text">(Description here)<br></p>
-  </a>
-  <a href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">Event 2</h4>
-    <p class="list-group-item-text">(Description here)</p>
-  </a>
-  <a href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">Event 3</h4>
-    <p class="list-group-item-text">(Description here)</p>
-  </a>
-  
-</div>
-
-
-
+    <!-- Events List -->
+    <div class="list-group">
+        <!--<a href="#" class="list-group-item active">-->
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 1</h4>
+            <p class="list-group-item-text">(Description here)<br></p>
+        </a>
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 2</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a>
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 3</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a>
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 4</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a> 
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 5</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a> 
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 6</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a> 
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event 7</h4>
+            <p class="list-group-item-text">(Description here)</p>
+        </a> 
+    </div>
 
 </body>
 </html>
