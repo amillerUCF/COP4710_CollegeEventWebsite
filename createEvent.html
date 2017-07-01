@@ -1,82 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
-    
-    <title>Your Events</title>
+  <title>Create Event</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-    <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
-    
-    <!-- Custom styles for this template -->
-    <style>
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-    
-        .navbar-inverse {
-            border-radius: 0px;
-        }
-        
-        .event-info-list {
-            padding-left: 10%;
-            padding-right: 10%;
-            padding-bottom: 10%;
-        }
-        
-        category-picker {
-            background-color: grey;
-        }
-        
-        select#soflow {
-           border: 2px solid #454747
-           background-color: #dee9fc;
-           border-radius: 5px;
-           outline-width: 0; <!-- Gets rid of outline when
-                                  pressing html elements. -->
-           font-size: inherit;
-           overflow: hidden;
-           padding: 5px 1px;
-           text-overflow: ellipsis;
-           white-space: nowrap;
-        }
-        
-        input {
-            border: 2px solid #454747
-            background-color: #dee9fc;
-            border-radius: 5px;
-            padding: 5px 5px;
-            outline-width: 0;
-        }
-        
-        textarea {
-            border: 2px solid #454747
-            background-color: #dee9fc;
-            border-radius: 5px;
-            padding: 5px 5px;
-            outline-width: 0;
-            width: 400px;
-            height: 100px;
-            resize: none;
-        }
-        
-        button {
-            background-color: #73a4f4;
-        }
-    </style>
+  <title>Create Event</title>
+  
+  <style>
+.space {
+  height: 40px;
+    }
+  </style>
+
 </head>
 <body>
-    <!-- Header Navbar -->
+
+   <!-- Header Navbar -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">&larr;</a>
+                <a class="navbar-brand" href="#">&#9776;</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
@@ -84,66 +31,70 @@
         </div>
     </nav>
 
-    <div class="content">
-        <!-- Page Header -->
-        <div class="col-xs-0">
-            <h1 align="center">Create Event</h1>
-        </div>
-        
-        <hr>
-        
-        <div class="row">
-            <div class="event-info-list">
-                <div class="col-xs-0">
-                    <h4>Categories:</h4>
-                </div>
+<div class="container">
+  <h2>Create Event</h2>
+  <div class = "space"> </div>
+  
+  <div class = "row">
+		<div class = "col-md-6">
+			<form action="/action_page.php">
+			<div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catgegories
+			  <span class="caret"></span></button>
+			  <ul class="dropdown-menu">
+				<li><a href="#">Sports</a></li>
+				<li><a href="#">UCF General</a></li>
+				<li><a href="#">Community Fun</a></li>
+			  </ul>
+			</div>
+		</div>
+</div>
 
-                <select id="soflow">
-                        <option value="1">Academic</option>
-                        <option value="2">Entertainment</option>
-                        <option value="3">Social events</option>
-                    </select>
-                
-                <br>
-                <br>
-                
-                <h4>Title:</h4>
-                <input id="title" placeholder="Title" name="title">
-                
-                <br>
-                <br>
-                
-                <h4>Description:</h4>
-                <textarea></textarea>
-                
-                <br>
-                <br>
-                
-                <h4>When ?</h4>
-                <form action="/action_page.php">
-                  <input type="date" name="bday">
-                  at
-                  <input type="time" name="usr_time">
-                </form>
-                
-                <br>
-                
-                <h4>Contact Email:</h4>
-                <input id="email" placeholder="Email" name="email">
-            
-                <br>
-                <br>
-                
-                <h4>Contact Phone:</h4>
-                <input id="phone" placeholder="Phone #" name="phone">
-            
-                <br>
-                <br>
-                
-                <button type="submit" class="btn btn-default">Create Event!</button> 
-            
-            </div> 
-        </div>
+<div class = "space"> </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="title" class="form-control" id="email" placeholder="Enter title" name="title">
     </div>
+	
+	<div class = "space"> </div>
+	
+    <div class="form-group">
+      <label for="pwd">Description</label>
+	  <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+	
+	<div class = "space"> </div>
+	
+	 <div class="form-group">
+      <label for="pwd">When</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Month/Day/Year" name="pwd">
+    </div>
+	
+	<div class = "space"> </div>
+	
+	<div class="form-group">
+      <label for="pwd">Contact Email</label>
+      <input type="password" class="form-control" id="pwd" placeholder="" name="pwd">
+    </div>
+	
+	<div class = "space"> </div>
+	
+	<div class="form-group">
+      <label for="pwd">Contact Phone Number</label>
+      <input type="password" class="form-control" id="pwd" placeholder="(407) XXX-XXXX" name="pwd">
+    </div>
+	
+	<div class = "space"> </div>
+	
+    <button type="submit" class="btn btn-default">Create Event</button>
+	
+	<div class = "space"> </div>
+	
+  </form>
+</div>
+
 </body>
 </html>
+   
+
