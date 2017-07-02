@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
 
-    <title>Knight Events Login</title>
+    <title>Menu Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
@@ -54,6 +54,7 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
+
     </style>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -67,42 +68,88 @@
   </head>
 
   <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Knight Events</a>
+   <!-- Header Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">&#9776;</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+        </div>
+    </nav>
+	
+	<div class="container">
+	<div class = "row">
+				<h2 align = "center">Menu</h2>
+	</div>
+  <form action="/action_page.php">
+    <div class= "row">
+			<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+			<a href="searchEvents.html"
+			<button class="btn btn-md btn-primary btn-block" type="submit">Search Events</button>
+			</a>
+			</div>
+			<div class = "col-md-3"> </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-    </ul>
-  </div>
-</nav>
-
-    <div class="container">
-      <form class="form-signin">
-	  <img src="KnightEventsLogo.jpg" class="img-rounded" alt="UCF Logo" width="304" height="236">
-        <h2 class="form-signin-heading">Please sign in</h2>
-		
-		<form action="submitLogin.php" method="post">		
-				<input type="text" class="form-control" id = "username" name = "username" placeholder="Email address" required autofocus>
-				<input type="password" class="form-control" id = "password" name = "password" placeholder="Password" required>
-				<label class="checkbox">
-				<input type="checkbox" value="remember-me"> Remember me
-				</label>
-				<a href = "submitLogin.php"
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<p> </p>
+    <div class="row">
+	<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+			<a href="events.html"
+				<button class="btn btn-md btn-primary btn-block" type="submit">My Events</button>
+			</a>
+			</div>
+			<div class = "col-md-3"> </div>
+    </div>
+		<p> </p>
+	<!--<div class="row">
+		<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+		<button class="btn btn-md btn-primary btn-block" type="submit">My Account</button>
+		</div>
+			<div class = "col-md-3"> </div>
+    </div>-->
+	<p> </p>
+	<!--<div class="row">
+	<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+	<button class="btn btn-md btn-primary btn-block" type="submit">Events</button>
+			</div>
+			<div class = "col-md-3"> </div>
+    </div> -->
+	<p> </p>
+	
+	<div class="row">
+	<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+				<a href = "logOut.php"
+				<button class="btn btn-md btn-primary btn-block" type="submit">Log Out</button>
 				</a>
-		</form>
-		<p align="center">Click <a href="login4.html">Here</a> to register</p>
-      </form>
-	  
-	  <div class="space"> </div>
-	  
-	  
+			</div>
+		<div class = "col-md-3"> </div>
+    </div>
+	
+  </form>
+</div>
 
-    </div> <!-- /container -->
-	
-	
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+
+
+<div class="container">
+  <div class="jumbotron">
+  <img src="menuBackground.jpg" class="img-rounded" alt="CFE Arena">
+  <img src="UCFLogo2.jpg" class="img-rounded" alt="UCF Athletics" width="304" height="236">
+  <img src="UCFEvent.jpg" class="img-rounded" alt="UCF Events">
+    <h1>Book Organization's Next Event With Us!</h1>      
+    <p></p>
+  </div>      
+</div>
 
 
     <!-- Bootstrap core JavaScript
