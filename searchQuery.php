@@ -86,10 +86,15 @@
 //variables from the page being grabbed.
 $university = $_POST['university'];
 $rsos = $_POST['rsos'];
-//$category = $_POST['category'];
+$univ_id = 0;
+$category = $_POST['category'];
+$rso_id = 0;
+
 
 //debugging code
-//echo($rsos);
+echo(strlen($university));
+echo(strlen($rsos));
+echo(strlen($category));
 //echo($university);
 
 //$university2 = 1;
@@ -126,8 +131,17 @@ if (!$conn)
 echo "Connected successfully";
 
         /*use sql to get the requested data from the database*/
-		//remember to enter the university id number instead of the actual university
-		$result = $conn->query("SELECT name, description, event_date, contact_phone, contact_email, event_id, location FROM events WHERE univ_id = '$university'");
+		//we will choose to prioritze searching by university.
+		if(strlen($university)>0){
+		//convert from the university name to an id number to use in the next query
+		
+		$result0 = $conn->query("SELECT name, univ_id FROM universities WHERE name = '$university'");
+		while($row0 = mysqli_fetch_array($result0))
+		{
+				$univ_id = $row0['univ_id'];
+		}
+		
+		$result = $conn->query("SELECT name, description, event_date, contact_phone, contact_email, event_id, location FROM events WHERE univ_id = '$univ_id'");
 		
 		while($row = mysqli_fetch_array($result))
 		{
@@ -155,6 +169,45 @@ echo "Connected successfully";
 				}
 		echo "<br></br>";
 		}
+	}
+	else
+	{
+					//convert from the rso name to an id number to use in the next query
+		
+		$result0 = $conn->query("SELECT name, rso_id FROM rso WHERE name = '$rsos'");
+		while($row0 = mysqli_fetch_array($result0))
+		{
+				$rso_id = $row0['rso_id'];
+		}
+		
+		$result = $conn->query("SELECT name, description, event_date, contact_phone, contact_email, event_id, location FROM events WHERE rso = '$rso_id'");
+		while($row = mysqli_fetch_array($result))
+		{
+			$name = $row['name'];
+			$description = $row['description'];
+			$date = $row['event_date'];
+			$contact_phone = $row['contact_phone'];
+			$contact_email = $row['contact_email'];
+			$event_id = $row['event_id'];
+		echo "<p><strong>Name:</strong> " . $name . "</p>";
+		echo "<p><strong>Description:</strong> " . $description . "</p>";
+		echo "<p><strong>Date:</strong> " . $date . "</p>";
+		echo "<p><strong>Contact Phone:</strong> " . $contact_phone . "</p>";
+		echo "<p><strong>Contact Email:</strong> " . $contact_email . "</p>";
+		$result2 = $conn->query("SELECT c.text, r.rating FROM comments c, ratings r, events e WHERE e.event_id = c.event_id AND r.comment_id = c.comment_id AND e.event_id = '$event_id'");
+				while($row2 = mysqli_fetch_array($result2))
+				{
+					$text = $row2['text'];
+					$rating = $row2['rating'];
+					echo "<p><strong>Comment :</strong></p>";
+					echo "<p>" . $text . "<br></p>"; 
+					echo"<strong>Rating: </strong>" . $rating . "</p>";
+					echo "<a href=/>Remove Comment</a>";	
+					echo "<br></br>";
+				}
+		echo "<br></br>";
+		}
+	}
 		
 		
         //$stmt = $dbh->prepare("SELECT name, description, event_date, contact_phone, contact_email, event_id, location FROM events WHERE event_id = :event_id");        
