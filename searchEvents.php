@@ -12,6 +12,10 @@
         .navbar-inverse {
             border-radius: 0px;
         }
+		
+		.space{
+			height: 30px;
+		}
     </style>
 </head>
 <body>
@@ -38,18 +42,28 @@
     <div class="form-group">
 	 <label for="rsos">RSOs:</label>
 	<input type="text" class="form-control" id="rsos" placeholder="Enter RSOs" name="rsos">
-    	<div class="dropdown">
+	
+	<div class="space"> </div>
+	
+	 <label for="category">Category:</label>
+	<input type="text" class="form-control" id="category" placeholder="Enter Category" name="category">
+	
+  <!--<div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" name="category">Category
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
     <li><a href="#">Academic</a></li>
+	<li class="divider"></li>
     <li><a href="#">Entertainment</a></li>
+	<li class="divider"></li>
     <li><a href="#">Social events</a></li>
   </ul>
-</div>
+</div>-->
+
+<div class = "space"> </div>
+
+
 	<div class="form-group">
-      <label for="search">Search:</label>
-      <input type="search" class="form-control" id="search" placeholder="search" name="search">
 	   <button type="submit" class="btn btn-default">Search</button> 
     </div>  
   </form>
