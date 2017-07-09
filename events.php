@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -44,83 +45,6 @@
     </style>
 </head>
 
-<?php
-
-session_start();
-
-function getEventInfo()
-{
-    /** Connect to database. */
-    $sql_hostname = 'localhost';
-    $sql_username = 'root';
-    $sql_password = 'root';
-    $sql_dbname = '';
-    
-    try
-    {
-        $dbh = new PDO("mysql:host=$sql_hostname;dbname=$sql_dbname", $sql_username, $sql_password);
-
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        /*** prepare the select statement ***/
-        $stmt = $dbh->prepare("SELECT name, description");        
-
-        $stmt->bindParam(':event_id', $_GET['event_id'], PDO::PARAM_INT);
-		
-		/*** execute the prepared statement ***/
-        $stmt->execute();
-		
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);		
-
-		$GLOBALS['location'] = $result['location'];
-		
-		$stmt = null;
-    }
-    catch(Exception $e)
-    {
-        echo 'We are unable to process your request. Please try again later.';
-    }	
-}
-
-function getComments() {
-	
-	/** Connect to database. */
-    $sql_hostname = 'localhost';
-    $sql_username = 'root';
-    $sql_password = 'root';
-    $sql_dbname = '';
-	
-	try
-    {
-        $dbh = new PDO("mysql:host=$sql_hostname;dbname=$sql_dbname", $sql_username, $sql_password);
-
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $stmt = $dbh->prepare("SELECT c.text, r.rating FROM comments c, ratings r, events e WHERE e.event_id = c.event_id AND r.comment_id = c.comment_id AND e.event_id = :event_id");        
-
-        $stmt->bindParam(':event_id', $_GET['event_id'], PDO::PARAM_INT);
-		
-		/** Execute. */
-        $stmt->execute();
-		
-		echo "<h3>Comments: </h3>";
-		
-		while($result = $stmt->fetch(PDO::FETCH_ASSOC))
-		{
-			echo "<h3>" . $result['text'] . "\t\t\t" . "Rating: " .$result['rating'] . "</h3>" . "<a href=/>Remove</a>";
-		}
-		
-		$stmt = null;
-    }
-    catch(Exception $e)
-    {
-        echo 'We are unable to process your request. Please try again later';
-    }	
-	
-}
-
-?>
-
 <body>
     <!-- Header Navbar -->
     <nav class="navbar navbar-inverse">
@@ -139,48 +63,73 @@ function getComments() {
         <h1 align="center">Your Events</h1>
     </div>
 
-    <!-- Events List -->
-    <div class="list-group">
-        <!--<a href="#" class="list-group-item active">-->
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 1</h4>
-            <p class="list-group-item-text">(Description here)<br></p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 2</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 3</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 4</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a> 
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 5</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a> 
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 6</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a> 
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event 7</h4>
-            <p class="list-group-item-text">(Description here)</p>
-        </a> 
-    </div>
+    <hr>
+    
+    <?php
+
+    /* begin session */
+    session_start();
+    
+    // Local variables
+    $user_id = $_SESSION['user_id'];
+    $event_id = '';
+    $description = '';
+
+    //variable to determine what kind of search we are doing
+    $switchVar = 0;
+        
+    /*** connect to database ***/
+    /*** mysql hostname ***/
+    $mysql_hostname = 'localhost';
+    /*** mysql username ***/
+    $mysql_username = 'root';
+    /*** mysql password ***/
+    $mysql_password = 'okay';
+    /*** database name ***/
+    $mysql_dbname = 'cop4710';
+    
+    // Create connection
+    $conn = mysqli_connect($mysql_hostname, $mysql_username, $mysql_password, $mysql_dbname);
+
+    // Check connection
+    if (!$conn) 
+    {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    
+    echo "Connected successfully";
+
+    // Query 'follow' table results for current logged in user.
+    $result = $conn->query("SELECT user_id, event_id FROM follows WHERE user_id = '$user_id'");
+    
+    while($row = mysqli_fetch_array($result))
+    {
+        $user_id = $row['user_id'];
+        $event_id = $row['event_id'];
+        
+        $result2 = $conn->query("SELECT description FROM events WHERE event_id = '$event_id'");
+        
+        // Print out the event and it's description if it has one.
+        if($row2 = mysqli_fetch_array($result2))
+        {
+            $description = $row2['description'];
+            echo "<a href='eventInfo.php' class='list-group-item'>
+                <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
+                <h4 class='list-group-item-text'>" . $description . "</h4></a>";
+        }
+        // No description was found for event.
+        else
+            echo "<a href='eventInfo.php' class='list-group-item'>
+                <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
+                <h4 class='list-group-item-text'>No description found.</h4></a>";
+        
+        // Set back to null for next event's description.
+        $description = '';
+    }
+     
+    ?>
+
+    
 
 </body>
 </html>
-
-<?php
-
-/** Prints out all the data to the screen. */
-echo "<h2>Your Input:</h2>";
-echo "<h1>" . $result["name"] . "</h1>";
-echo "<br>";
-echo "<h5>Description: <p>" . $result["description"] . "</p></h5>";
-
-?>

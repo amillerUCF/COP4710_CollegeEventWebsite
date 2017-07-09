@@ -77,7 +77,7 @@ if($user_id == false)
 				
 				
                 /* log in was successfull.go to home page */                
-				header('Location: events.html');
+				header('Location: events.php');
 				
         }
 
