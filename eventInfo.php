@@ -14,6 +14,10 @@
     
     <!-- Custom styles for this template -->
     <style>
+        html, body {
+            overflow: hidden;
+        }
+    
         .navbar-inverse {
             border-radius: 0px;
         }
@@ -45,93 +49,6 @@
     </style>
 </head>
 
-<?php
-
-session_start();
-
-function getEventInfo()
-{
-    /** Connect to database. */
-    $sql_hostname = 'localhost';
-    $sql_username = 'root';
-    $sql_password = 'root';
-    $sql_dbname = '';
-    
-    try
-    {
-        $dbh = new PDO("mysql:host=$sql_hostname;dbname=$sql_dbname", $sql_username, $sql_password);
-
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        /*** prepare the select statement ***/
-        $stmt = $dbh->prepare("SELECT name, category, university, contact_phone, contact_email, event_id, location FROM events WHERE event_id = :event_id, description");        
-
-        $stmt->bindParam(':event_id', $_GET['event_id'], PDO::PARAM_INT);
-		
-		/*** execute the prepared statement ***/
-        $stmt->execute();
-		
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);		
-
-		$GLOBALS['location'] = $result['location'];
-		
-		echo "<h1>" . $result['name'] . "</h1>";
-        echo "<h5>Categories: <p>" . $result['category'] . "</p></h5>";
-		echo "<h5>University: <p>" . $result['university'] . "</p></h5>";
-		echo "<h5>Date: <p>" . $result['event_date'] . "</p></h5>";
-		echo "<h5>Contact Phone: <p>" . $result['contact_phone'] . "</p></h5>";
-		echo "<h5>Contact Email: <p>" . $result['contact_email'] . "</p></h5>";
-        echo "<h5>Description: <p>" . $result['description'] . "</p></h5>";
-		
-		//echo $row['name'] . "\t" . $row['description'] . "\t" . $row['event_date'] . "\t" . $row['contact_phone'] . "\t" . $row['contact_email'] . "<br><br>";				
-		
-		$stmt = null;
-    }
-    catch(Exception $e)
-    {
-        echo 'We are unable to process your request. Please try again later.';
-    }	
-}
-
-function getComments() {
-	
-	/** Connect to database. */
-    $sql_hostname = 'localhost';
-    $sql_username = 'root';
-    $sql_password = 'root';
-    $sql_dbname = '';
-	
-	try
-    {
-        $dbh = new PDO("mysql:host=$sql_hostname;dbname=$sql_dbname", $sql_username, $sql_password);
-
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $stmt = $dbh->prepare("SELECT c.text, r.rating FROM comments c, ratings r, events e WHERE e.event_id = c.event_id AND r.comment_id = c.comment_id AND e.event_id = :event_id");        
-
-        $stmt->bindParam(':event_id', $_GET['event_id'], PDO::PARAM_INT);
-		
-		/** Execute. */
-        $stmt->execute();
-		
-		echo "<h3>Comments: </h3>";
-		
-		while($result = $stmt->fetch(PDO::FETCH_ASSOC))
-		{
-			echo "<h3>" . $result['text'] . "\t\t\t" . "Rating: " .$result['rating'] . "</h3>" . "<a href=/>Remove</a>";
-		}
-		
-		$stmt = null;
-    }
-    catch(Exception $e)
-    {
-        echo 'We are unable to process your request. Please try again later';
-    }	
-	
-}
-
-?>
-
 <body>
     <!-- Header Navbar -->
     <nav class="navbar navbar-inverse">
@@ -145,31 +62,80 @@ function getComments() {
         </div>
     </nav>
 
-    <?php 
-		
-        getEventInfo();
-        echo "<br>";
-        getComments();
+    <?php
+
+    /* begin session */
+    session_start();
+    
+    // Local variables
+    //$event_id = $_SESSION['event_id'];
+    $event_id = 1;
+    $name;
+    $category;
+    $description;
+    $event_time;
+    $event_date;
+
+    //variable to determine what kind of search we are doing
+    $switchVar = 0;
+        
+    /*** connect to database ***/
+    /*** mysql hostname ***/
+    $mysql_hostname = 'localhost';
+    /*** mysql username ***/
+    $mysql_username = 'root';
+    /*** mysql password ***/
+    $mysql_password = 'okay';
+    /*** database name ***/
+    $mysql_dbname = 'cop4710';
+    
+    // Create connection
+    $conn = mysqli_connect($mysql_hostname, $mysql_username, $mysql_password, $mysql_dbname);
+
+    // Check connection
+    if (!$conn) 
+    {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    
+    echo "Connected successfully";
+
+    // Query 'event' table for details on a specific event.
+    $result = $conn->query("SELECT name, category, event_time, event_date, location, description, contact_phone, contact_email FROM events WHERE event_id = '$event_id'");
+    
+    if($row = mysqli_fetch_array($result))
+    {
+        // Gets specific data from the 'event' query.
+        $name = $row['name'];
+        $category = $row['category'];
+        $location = $row['location'];
+        $event_time = $row['event_time'];
+        $event_date = $row['event_date'];
+        $description = $row['description'];
+    }
     
     ?>
     
     <!-- Page Header -->
     <div class="col-xs-0">
-        <h1 align="center">(Event Title Here)</h1>
+        <h1 align="center"><?php echo $name ?></h1>
     </div>
     <div class="row">
         <div class="event-info-list">
-            <p1 class="event-list-item">
+            <!--<p1 class="event-list-item">
                 <h5>Hosted By: <p>(RSO's here)</p></h5>
+            </p1>-->
+            <p1 class="event-list-item">
+                <h5>Categories: <p><?php echo $category ?></p></h5>
             </p1>
             <p1 class="event-list-item">
-                <h5>Categories: <p>(Categories this event falls under)</p></h5>
+                <h5>Location: <p><?php echo $location ?></p></h5>
             </p1>
             <p1 class="event-list-item">
-                <h5>University: <p>(University here)</p></h5>
+                <h5>Time/Date: <p><?php echo $event_time . " @ " . $event_date ?></p></h5>
             </p1>
             <p1 class="event-list-item">
-                <h5>Description: <p>101000100010111011011000110010001110110111000111011011111011000111010000110000010001</p></h5>
+                <h5>Description: <p><?php echo $description ?></p></h5>
             </p1>
             <br>
             <h4>Comments</h4>
@@ -186,12 +152,21 @@ function getComments() {
                 
                 <!-- Comments -->
                 <div class="list-group">
-                    <p1 class="comment-list-item">
-                        <h5 class="list-group-item-heading">Comment 1: <p2>asdfasdf</p2></h4>
-                    </p1>
-                    <p1 class="comment-list-item">
-                        <h5 class="list-group-item-heading">Comment 2: <p2>asdfasdf</p2></h4>
-                    </p1>
+                    <?php
+                
+                    $commentCount = 1;
+                
+                    // Query 'comments' table for comments on event.
+                    $result2 = $conn->query("SELECT text FROM comments WHERE event_id = '$event_id'");
+                    
+                    while($row2 = mysqli_fetch_array($result2))
+                    {
+                        echo '<p1 class="comment-list-item">
+                                  <h5 class="list-group-item-heading">Comment ' . $commentCount . ': <br><p2>' . $row2['text'] . '</p2></h4></p1>';
+                        $commentCount++;
+                    }
+                    
+                    ?>
                 </div>
             </div>  
         </div> 

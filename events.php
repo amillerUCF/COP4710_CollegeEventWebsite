@@ -111,7 +111,7 @@
         
         // Print out the event and it's description if it has one.
         if($row2 = mysqli_fetch_array($result2))
-        {
+        {            
             $description = $row2['description'];
             echo "<a href='eventInfo.php' class='list-group-item'>
                 <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
@@ -119,9 +119,11 @@
         }
         // No description was found for event.
         else
+        {
             echo "<a href='eventInfo.php' class='list-group-item'>
                 <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
                 <h4 class='list-group-item-text'>No description found.</h4></a>";
+        }
         
         // Set back to null for next event's description.
         $description = '';
