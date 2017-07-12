@@ -35,6 +35,7 @@ body {
 $name = $_POST['name'];
 $rsos = $_POST['rsos'];
 $user_id = 0;
+$num_members = 0;
 
 /* begin session */
 session_start();
@@ -78,6 +79,22 @@ echo "Connected successfully";
 				$rso_id = $row0['rso_id'];
 		}
 //echo "The rso id is: " . $rso_id . ".";
+$sql="SELECT * FROM In_RSO WHERE rso_id = '$rso_id'";
+
+if ($result=mysqli_query($conn,$sql))
+  {
+  // Return the number of rows in result set
+  $rowcount=mysqli_num_rows($result);
+  //echo"Result set has : " . $rowcount . " members.";
+  // Free result set
+  mysqli_free_result($result);
+  
+	if($rowcount<5)
+	{
+		echo"<h3 align='center'>Your club is currently inactive. Once 6 members are attained you may begin creating events. You currently have " .($rowcount+1) . " members.</h3>";
+	}
+  }
+
 
 
 
@@ -109,6 +126,8 @@ else
 		echo"<h1 align='center'>RSO Joined Successfully</h1>";
 		
 		echo"<p align='center'>Click <a href='menuPage.php'>Here</a> to Return to the menu page</p>";
+		
+		
 }
 
 

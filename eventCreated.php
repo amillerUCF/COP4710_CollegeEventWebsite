@@ -38,6 +38,8 @@ $description = $_POST['description'];
 $date = $_POST['date'];
 $contact_phone = $_POST['contact_phone'];
 $contact_email = $_POST['contact_email'];
+$rsos = $_POST['rsos'];
+$execution = true;
 
 /* begin session */
 session_start();
@@ -65,6 +67,31 @@ if (!$conn)
 	}
 echo "Connected successfully";
 
+$result0 = $conn->query("SELECT name, rso_id FROM rso WHERE name = '$rsos'");
+while($row0 = mysqli_fetch_array($result0))
+	{
+				$rso_id = $row0['rso_id'];
+	}
+//echo "The rso id is: " . $rso_id . ".";
+$sql="SELECT * FROM In_RSO WHERE rso_id = '$rso_id'";
+
+if ($result=mysqli_query($conn,$sql))
+  {
+  // Return the number of rows in result set
+  $rowcount=mysqli_num_rows($result);
+  //echo"Result set has : " . $rowcount . " members.";
+  // Free result set
+  mysqli_free_result($result);
+  
+	if($rowcount<6)
+	{
+		$execution = false;
+		echo"<h3 align='center'>Your club is currently inactive. Once 6 members are attained you may begin creating events. You currently have " .($rowcount) . " members.</h3>";
+		
+	}
+	
+  }
+
 
 //echo "winning";
 //echo($description);
@@ -73,6 +100,9 @@ echo "Connected successfully";
 //echo($contact_phone);
 
 //variable to determine whether the registration was successful
+if($execution==true)
+{
+	
 $eventCreated = true;
 
 $result = $conn->query("INSERT INTO events (name, category, description, event_time, event_date, location, univ_id, priv, rso, contact_phone, contact_email) VALUES ('$title', '$category', '$description', '17:30:00', '2015-04-17', 'University of Central Florida', 1, 2, 1, '$contact_phone', '$contact_email')");
@@ -88,17 +118,20 @@ $result = $conn->query("INSERT INTO events (name, category, description, event_t
     $errTyp = "danger";
     $errMSG = "Something went wrong, try again later..."; 
    }
-//if the registration was not successful, make sure the user knows   
-if($eventCreated==false)
-{
-	echo "<p><strong>Error Type:</strong> " . $errTyp . "</p>";
-	echo "<p><strong>Error Message:</strong> " . $errMSG . "</p>";
-}
-else
-{
+	//if the registration was not successful, make sure the user knows   
+	if($eventCreated==false)
+	{
+		echo "<p><strong>Error Type:</strong> " . $errTyp . "</p>";
+		echo "<p><strong>Error Message:</strong> " . $errMSG . "</p>";
+	}
+	else
+	{
 		echo"<h1 align='center'>Event Created Successfully</h1>";
 		
 		echo"<p align='center'>Click <a href='menuPage.php'>Here</a> to Return to the menu page</p>";
+	}
+
+
 }
 
 ?>

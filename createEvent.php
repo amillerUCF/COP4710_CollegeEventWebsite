@@ -11,11 +11,13 @@
   <title>Create Event</title>
   
   <style>
-  .navbar-inverse {
-    border-radius: 0px;
-  }
 .space {
   height: 40px;
+    }
+body {
+ padding-top: 0px;
+ padding-bottom: 40px;
+ background-color: #ffc904;
     }
   </style>
 
@@ -26,8 +28,11 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="menuPage.php">&larr;</a>
+                <a class="navbar-brand" href="#">&#9776;</a>
             </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -39,7 +44,7 @@
 		<div class = "col-md-6">
 			<form action="eventCreated.php" method="post">
 			<div class="form-group">
-      <label for="category">Catgegory</label>
+      <label for="category">Category</label>
       <input type="category" class="form-control" id="category" placeholder="Enter category" name="category">
     </div>
 		</div>
@@ -64,6 +69,13 @@
 	 <div class="form-group">
       <label for="date">When</label>
       <input type="date" class="form-control" id="date" placeholder="Month/Day/Year" name="date">
+    </div>
+	
+	<div class = "space"> </div>
+	
+	<div class="form-group">
+      <label for="rsos">RSO Hosting</label>
+      <input type="text" class="form-control" id="rsos" placeholder="What RSO is hosting" name="rsos">
     </div>
 	
 	<div class = "space"> </div>
