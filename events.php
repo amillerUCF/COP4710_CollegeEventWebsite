@@ -69,9 +69,11 @@
     session_start();
     
     // Local variables
-    $user_id = $_SESSION['user_id'];
+    $user_id = 0;//$_SESSION['user_id'];
     $event_id = '';
     $description = '';
+    $name = '';
+    
 
     //variable to determine what kind of search we are doing
     $switchVar = 0;
@@ -98,26 +100,33 @@
 
     // Query 'follow' table results for current logged in user.
     $result = $conn->query("SELECT user_id, event_id FROM follows WHERE user_id = '$user_id'");
-    
+   
     while($row = mysqli_fetch_array($result))
-    {
+    {   
         $user_id = $row['user_id'];
         $event_id = $row['event_id'];
-        
-        $result2 = $conn->query("SELECT description FROM events WHERE event_id = '$event_id'");
+
+        $result2 = $conn->query("SELECT name, description FROM events WHERE event_id = '$event_id'");
         
         // Print out the event and it's description if it has one.
         if($row2 = mysqli_fetch_array($result2))
         {            
+            $name = $row2['name'];
             $description = $row2['description'];
+            
+            
             if ($description != "")
-            echo "<a href='eventInfo.php' class='list-group-item'>
-                <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
-                <h4 class='list-group-item-text'>" . $description . "</h4></a>";
+            {
+                echo "<a href='eventInfo.php?event=" . $event_id . "' class='list-group-item'>
+                      <h4 class='list-group-item-heading'>" . $name . "</h4>
+                      <h4 class='list-group-item-text'>" . $description . "</h4></a>";
+            }
             else
-                echo "<a href='eventInfo.php' class='list-group-item'>
-                <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
-                <h4 class='list-group-item-text'>No description found.</h4></a>";
+            {
+                echo "<a href='eventInfo.php?event=" . $event_id . "' class='list-group-item'>
+                      <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
+                      <h4 class='list-group-item-text'>No description found.</h4></a>";
+            }
         }
 
         
@@ -126,8 +135,6 @@
     }
      
     ?>
-
     
-
 </body>
 </html>

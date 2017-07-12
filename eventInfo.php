@@ -15,7 +15,7 @@
     <!-- Custom styles for this template -->
     <style>
         html, body {
-
+            overflow-x: hidden;
         }
     
         .navbar-inverse {
@@ -54,10 +54,10 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="menuPage.php">&larr;</a>
+                <a class="navbar-brand" href="events.php">&larr;</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="menuPage.php">Home</a></li>
             </ul>
         </div>
     </nav>
@@ -67,9 +67,12 @@
     /* begin session */
     session_start();
     
+    // Gets the event id of the clicked event from the 'events' page
+    $_SESSION['event'] = $_GET['event'];
+    
     // Local variables
     //$event_id = $_SESSION['event_id'];
-    $event_id = 1;
+    $event_id = $_SESSION['event'];;
     $name;
     $category;
     $description;
@@ -94,11 +97,7 @@
 
     // Check connection
     if (!$conn) 
-    {
         die("Connection failed: " . mysqli_connect_error());
-    }
-    
-    echo "Connected successfully";
 
     // Query 'event' table for details on a specific event.
     $result = $conn->query("SELECT name, category, event_time, event_date, location, description, contact_phone, contact_email FROM events WHERE event_id = '$event_id'");
@@ -149,13 +148,11 @@
             
             <hr>
             
-            <form action="">
-            
             <!-- Comments section -->
             <div class="row">
                 <!-- Add comment -->
-                <div class="col-xs-2"><button type="submit" name="submit" class="btn btn-default">Post</button></div>
-                <div class="col-xs-2"><textarea rows="1" cols="35" type="text" name="comment"></textarea></div>
+                <!--<div class="col-xs-2"><button type="submit" name="submit" class="btn btn-default">Post</button></div>
+                <div class="col-xs-2"><textarea rows="1" cols="35" type="text" name="comment"></textarea></div>-->
                 
                 <br><br>
                 
@@ -178,7 +175,6 @@
                     ?>
                 </div>
             </div> 
-            </form>
         </div> 
     </div>
    
@@ -186,12 +182,12 @@
 </html>
 
 <?php
-
+/*
 $comment = $_GET['comment'];
 
 if($comment == "")
     echo "No query";
 else
     //$result = $conn->query("INSERT INTO comments (comment_id, event_id, user_id, text) VALUES ($commentCount, 1, 3, 'asdfasdfasdfasdfasdf')");
-
+*/
 ?>
