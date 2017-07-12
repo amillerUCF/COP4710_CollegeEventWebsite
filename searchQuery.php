@@ -75,7 +75,7 @@
                 <a class="navbar-brand" href="#">&#9776;</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="menuPage.php">Home</a></li>
             </ul>
         </div>
     </nav>

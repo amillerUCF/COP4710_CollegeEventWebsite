@@ -88,7 +88,7 @@
     <div class= "row">
 			<div class = "col-md-3"> </div>
 			<div class = "col-md-6">
-			<a href="searchEvents.html"
+			<a href="searchEvents.php"
 			<button class="btn btn-md btn-primary btn-block" type="submit">Search Events</button>
 			</a>
 			</div>
@@ -105,21 +105,35 @@
 			<div class = "col-md-3"> </div>
     </div>
 		<p> </p>
-	<!--<div class="row">
+	<div class="row">
 		<div class = "col-md-3"> </div>
 			<div class = "col-md-6">
-		<button class="btn btn-md btn-primary btn-block" type="submit">My Account</button>
+			<a href="joinRSO.php"
+		<button class="btn btn-md btn-primary btn-block" type="submit">Join RSO</button>
+			</a>
 		</div>
 			<div class = "col-md-3"> </div>
-    </div>-->
+    </div>
 	<p> </p>
-	<!--<div class="row">
+		<div class="row">
+		<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+			<a href="addUniversity.php"
+		<button class="btn btn-md btn-primary btn-block" type="submit">Add University</button>
+			</a>
+		</div>
+			<div class = "col-md-3"> </div>
+    </div>
+	<p> </p>
+	<div class="row">
 	<div class = "col-md-3"> </div>
 			<div class = "col-md-6">
-	<button class="btn btn-md btn-primary btn-block" type="submit">Events</button>
+			<a href = "createRSO.php"
+	<button class="btn btn-md btn-primary btn-block" type="submit">Create RSO</button>
+			</a>
 			</div>
 			<div class = "col-md-3"> </div>
-    </div> -->
+    </div> 
 	<p> </p>
 	
 	<div class="row">
