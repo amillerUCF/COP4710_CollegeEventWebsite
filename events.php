@@ -50,20 +50,18 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">&#9776;</a>
+                <a class="navbar-brand" href="menuPage.php">&larr;</a>
             </div>
         </div>
     </nav>
 
     <!-- Page Header -->
     <div class="col-xs-0">
-        <button type="button" class="btn btn-default btn-sm">
+        <!--<button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon-plus"></span>
-        </button>
+        </button>-->
         <h1 align="center">Your Events</h1>
     </div>
-
-    <hr>
     
     <?php
 
@@ -97,7 +95,6 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     
-    echo "Connected successfully";
 
     // Query 'follow' table results for current logged in user.
     $result = $conn->query("SELECT user_id, event_id FROM follows WHERE user_id = '$user_id'");
@@ -113,17 +110,16 @@
         if($row2 = mysqli_fetch_array($result2))
         {            
             $description = $row2['description'];
+            if ($description != "")
             echo "<a href='eventInfo.php' class='list-group-item'>
                 <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
                 <h4 class='list-group-item-text'>" . $description . "</h4></a>";
-        }
-        // No description was found for event.
-        else
-        {
-            echo "<a href='eventInfo.php' class='list-group-item'>
+            else
+                echo "<a href='eventInfo.php' class='list-group-item'>
                 <h4 class='list-group-item-heading'>" . "Event " . $event_id . "</h4>
                 <h4 class='list-group-item-text'>No description found.</h4></a>";
         }
+
         
         // Set back to null for next event's description.
         $description = '';

@@ -11,6 +11,9 @@
   <title>Create Event</title>
   
   <style>
+  .navbar-inverse {
+    border-radius: 0px;
+  }
 .space {
   height: 40px;
     }
@@ -23,11 +26,8 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">&#9776;</a>
+                <a class="navbar-brand" href="menuPage.php">&larr;</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-            </ul>
         </div>
     </nav>
 

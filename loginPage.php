@@ -15,6 +15,9 @@
 
     <!-- Custom styles for this template -->
     <style>
+    .navbar-inverse {
+      border-radius: 0px;
+    }
     body {
       padding-top: 0px;
       padding-bottom: 40px;

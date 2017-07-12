@@ -20,6 +20,9 @@
       padding-bottom: 40px;
       background-color: #ffc904;
     }
+    .navbar-inverse {
+        border-radius: 0px;
+    }
     .form-signin {
       max-width: 330px;
       padding: 15px;
@@ -72,10 +75,10 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">&#9776;</a>
+                <a class="navbar-brand" href="">&#9776;</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="">Home</a></li>
             </ul>
         </div>
     </nav>
@@ -98,7 +101,7 @@
     <div class="row">
 	<div class = "col-md-3"> </div>
 			<div class = "col-md-6">
-			<a href="events.html"
+			<a href="events.php"
 				<button class="btn btn-md btn-primary btn-block" type="submit">My Events</button>
 			</a>
 			</div>

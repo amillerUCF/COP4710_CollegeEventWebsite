@@ -54,7 +54,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">&larr;</a>
+                <a class="navbar-brand" href="menuPage.php">&larr;</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
@@ -192,6 +192,6 @@ $comment = $_GET['comment'];
 if($comment == "")
     echo "No query";
 else
-    $result = $conn->query("INSERT INTO comments (comment_id, event_id, user_id, text) VALUES ($commentCount, 1, 3, 'asdfasdfasdfasdfasdf')");
+    //$result = $conn->query("INSERT INTO comments (comment_id, event_id, user_id, text) VALUES ($commentCount, 1, 3, 'asdfasdfasdfasdfasdf')");
 
 ?>
