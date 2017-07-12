@@ -125,6 +125,16 @@
 			<div class = "col-md-3"> </div>
     </div>
 	<p> </p>
+			<div class="row">
+		<div class = "col-md-3"> </div>
+			<div class = "col-md-6">
+			<a href="createEvent.php"
+		<button class="btn btn-md btn-primary btn-block" type="submit">Create Event</button>
+			</a>
+		</div>
+			<div class = "col-md-3"> </div>
+    </div>
+	<p> </p>
 	<div class="row">
 	<div class = "col-md-3"> </div>
 			<div class = "col-md-6">
