@@ -26,7 +26,7 @@ body {
                 <a class="navbar-brand" href="#">&#9776;</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="menuPage.php">Home</a></li>
             </ul>
         </div>
     </nav>
@@ -98,7 +98,7 @@ else
 {
 		echo"<h1 align='center'>Event Created Successfully</h1>";
 		
-		echo"<p align='center'>Click <a href='loginPage.php'>Here</a> to Return to the login page</p>";
+		echo"<p align='center'>Click <a href='menuPage.php'>Here</a> to Return to the menu page</p>";
 }
 
 ?>
