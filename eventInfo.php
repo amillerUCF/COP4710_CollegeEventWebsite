@@ -15,7 +15,7 @@
     <!-- Custom styles for this template -->
     <style>
         html, body {
-            overflow: hidden;
+
         }
     
         .navbar-inverse {
@@ -114,6 +114,13 @@
         $description = $row['description'];
     }
     
+    /** Gathers all data from forms. */
+    function get_comments($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
     ?>
     
     <!-- Page Header -->
@@ -142,10 +149,12 @@
             
             <hr>
             
+            <form action="">
+            
             <!-- Comments section -->
             <div class="row">
                 <!-- Add comment -->
-                <div class="col-xs-2"><button>Post</button></div>
+                <div class="col-xs-2"><button type="submit" name="submit" class="btn btn-default">Post</button></div>
                 <div class="col-xs-2"><textarea rows="1" cols="35" type="text" name="comment"></textarea></div>
                 
                 <br><br>
@@ -168,9 +177,21 @@
                     
                     ?>
                 </div>
-            </div>  
+            </div> 
+            </form>
         </div> 
     </div>
    
 </body>
 </html>
+
+<?php
+
+$comment = $_GET['comment'];
+
+if($comment == "")
+    echo "No query";
+else
+    $result = $conn->query("INSERT INTO comments (comment_id, event_id, user_id, text) VALUES ($commentCount, 1, 3, 'asdfasdfasdfasdfasdf')");
+
+?>
