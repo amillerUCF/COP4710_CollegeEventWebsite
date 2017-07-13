@@ -36,8 +36,8 @@ $category = $_POST['category'];
 $title = $_POST['title'];
 $description = $_POST['description'];
 $date = $_POST['date'];
-$contact_phone = $_POST['contact_phone'];
-$contact_email = $_POST['contact_email'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
 $rsos = $_POST['rsos'];
 $execution = true;
 
@@ -96,8 +96,8 @@ if ($result=mysqli_query($conn,$sql))
 //echo "winning";
 //echo($description);
 //echo($title);
-//echo($contact_email);
-//echo($contact_phone);
+//echo($email);
+//echo($phone);
 
 //variable to determine whether the registration was successful
 if($execution==true)
@@ -105,7 +105,7 @@ if($execution==true)
 	
 $eventCreated = true;
 
-$result = $conn->query("INSERT INTO events (name, category, description, event_time, event_date, location, univ_id, priv, rso, contact_phone, contact_email) VALUES ('$title', '$category', '$description', '17:30:00', '2015-04-17', 'University of Central Florida', 1, 2, 1, '$contact_phone', '$contact_email')");
+$result = $conn->query("INSERT INTO events (name, category, description, event_time, event_date, location, univ_id, priv, rso, contact_phone, contact_email) VALUES ('$title', '$category', '$description', '17:30:00', '2015-04-17', 'University of Central Florida', 1, 2, 1, '$phone', '$email')");
    if ($result) 
    {
     $errTyp = "success";
