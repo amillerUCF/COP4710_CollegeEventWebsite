@@ -1,88 +1,123 @@
 <?php
+session_start();
     
     $noErrors = TRUE;
-
+    
     // Form variables set to empty values.
-    $category = $title = $description = $date = $time = $email = $phone = "";
+    $category = $title = $description = $date = $rsos = $email = $phone = "";
     
     // Error variables set to empty values.
-    $titleErr = $descriptionErr = $dateErr = $timeErr = $emailErr = $phoneErr = "";
+    $categoryErr = $titleErr = $descriptionErr = $dateErr = $rsosErr = $emailErr = $phoneErr = "";
 
-    verifyData();
     
-    function verifyData()
+    /*** Verification ***/
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        global $noErrors;
-        
-        /*** Verification ***/
-        if ($_SERVER["REQUEST_METHOD"] == "POST")
+        /** Verify input of "name" in form. */
+        if (empty($_POST["category"])) // Line is executed when "name" form is empty.
         {
-            /** Verify input of "name" in form. */
-            if (empty($_POST["title"])) // Line is executed when "name" form is empty.
-            {
-                echo "title ";
-                $titleErr = "Name is required";
-                $noErrors = FALSE;
-            }
-
-            /** Verify "description". */
-            if (empty($_POST["description"]))
-            {
-                echo "description ";
-                $descriptionErr = "Description is required";
-                $noErrors = FALSE;
-            }
-            
-            /** Verify "date". */
-            if (empty($_POST["date"]))
-            {
-                echo "date ";
-                $dateErr = "Date is required";
-                $noErrors = FALSE;
-            }
-            
-            
-            /** Verify "email". */
-            if (empty($_POST["email"]))
-            {
-                echo "email ";
-                $emailErr = "Email is required";
-                $noErrors = FALSE;
-            }
-            else
-            {
-                if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))
-                {
-                    echo "email ";
-                    $emailErr = "Invalid email format";
-                    $email = "";
-                    $noErrors = FALSE;
-                }
-            }
-            
-            /** Verify "phone". */
-            if (empty($_POST["phone"]))
-            {
-                echo "phone ";
-                $phoneErr = "Phone is required";
-                $noErrors = FALSE;
-            } 
-            else
-            {
-                // check if phone # is only digits.
-                if (!preg_match("/^[0-9 ]*$/", $_POST["phone"]))
-                {
-                    echo "phone ";
-                    $phoneErr = "Only digits allowed";
-                    $phone = "";
-                    $noErrors = FALSE;
-                }
-            }
-            
-            if($noErrors == TRUE)
-                header("Location: eventCreated.php");
+            $categoryErr = "* Category is required";
+            $noErrors = FALSE;
         }
+        else
+        {
+            $category = $_POST["category"];
+            $_SESSION["category"] = $category;
+        }
+        
+        /** Verify input of "name" in form. */
+        if (empty($_POST["title"])) // Line is executed when "name" form is empty.
+        {
+            $titleErr = "* Title is required";
+            $noErrors = FALSE;
+        }
+        else
+        {
+            $title = $_POST["title"];
+            $_SESSION["title"] = $title;
+        }
+
+        /** Verify "description". */
+        if (empty($_POST["description"]))
+        {
+            $descriptionErr = "* Description is required";
+            $noErrors = FALSE;
+        }
+        else
+        {
+            $description = $_POST["description"];
+            $_SESSION["description"] = $description;
+        }
+        
+        /** Verify "date". */
+        if (empty($_POST["date"]))
+        {
+            $dateErr = "* Date is required";
+            $noErrors = FALSE;
+        }
+        else
+        {
+            $date = $_POST["date"];
+            $_SESSION["date"] = $date;
+        }
+        
+        /** Verify "rsos". */
+        if (empty($_POST["rsos"]))
+        {
+            $rsosErr = "* An RSO is required";
+            $noErrors = FALSE;
+        }
+        else
+        {
+            $rsos = $_POST["rsos"];
+            $_SESSION["rsos"] = $rsos;
+        }
+        
+        /** Verify "email". */
+        if (empty($_POST["email"]))
+        {
+            $emailErr = "* Email is required";
+            $noErrors = FALSE;
+        }
+        else
+        {
+            if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))
+            {
+                $emailErr = "* Invalid email format";
+                $noErrors = FALSE;
+            }
+            else
+            {
+                $email = $_POST["email"];
+                $_SESSION["email"] = $email;
+            }
+        }
+        
+        /** Verify "phone". */
+        if (empty($_POST["phone"]))
+        {
+            $phoneErr = "* Phone is required";
+            $noErrors = FALSE;
+        } 
+        else
+        {
+            // check if phone # is only digits.
+            if (!preg_match("/^[0-9 ]*$/", $_POST["phone"]))
+            {
+                $phoneErr = "* Only digits allowed";
+                $noErrors = FALSE;
+            }
+            else
+            {
+                $phone = $_POST["phone"];
+                $_SESSION["phone"] = $phone;
+            }
+        }
+        
+        if($noErrors == TRUE)
+            header('Location: eventCreated.php');
     }
+
 ?>
 
 <html lang="en">
@@ -132,10 +167,11 @@ body {
   
   <div class = "row">
 		<div class = "col-md-6">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 			<div class="form-group">
       <label for="category">Category</label>
-      <input type="category" class="form-control" id="category" placeholder="Enter category" name="category">
+      <input type="category" class="form-control" id="category" placeholder="Enter category" name="category" value="<?php echo $category;?>">
+      <span class="error"> <?php echo $categoryErr;?></span>
     </div>
 		</div>
 </div>
@@ -151,7 +187,7 @@ body {
 	<div class = "space"> </div>
 	
     <div class="form-group">
-      <label for="pwd">Description</label>
+      <label for="description">Description</label>
 	  <textarea class="form-control" rows="5" id="comment" name="description" value="<?php echo $description;?>"></textarea>
       <span class="error"> <?php echo $descriptionErr;?></span>
     </div>
@@ -168,7 +204,8 @@ body {
 	<!-- Needs constraint checking -->
 	<div class="form-group">
       <label for="rsos">RSO Hosting</label>
-      <input type="text" class="form-control" id="rsos" placeholder="What RSO is hosting" name="rsos">
+      <input type="text" class="form-control" id="rsos" placeholder="What RSO is hosting" name="rsos" value="<?php echo $rsos;?>">
+      <span class="error"> <?php echo $rsosErr;?></span>
     </div>
 	
 	<div class = "space"> </div>
@@ -190,16 +227,6 @@ body {
 	<div class = "space"> </div>
 	
     <button name="submit" id="submit" type="submit" class="btn btn-default" value="RUN">Create Event</button>
-	
-    <?php
-    
-    if (array_key_exists('submit', $_POST)) {
-        echo "Run";
-        verifyData();
-        echo "Done";
-    }
-    
-    ?>
     
 	<div class = "space"> </div>
 	

@@ -32,17 +32,17 @@ body {
     </nav>
 <?php
 
-$category = $_POST['category'];
-$title = $_POST['title'];
-$description = $_POST['description'];
-$date = $_POST['date'];
-$phone = $_POST['phone'];
-$email = $_POST['email'];
-$rsos = $_POST['rsos'];
-$execution = true;
-
 /* begin session */
 session_start();
+
+$category = $_SESSION['category'];
+$title = $_SESSION['title'];
+$description = $_SESSION['description'];
+$date = $_SESSION['date'];
+$phone = $_SESSION['phone'];
+$email = $_SESSION['email'];
+$rsos = $_SESSION['rsos'];
+$execution = true;
 
 $location = "UCF";
 
