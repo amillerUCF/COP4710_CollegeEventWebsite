@@ -96,7 +96,7 @@
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 				</a>
 		</form>
-		<p align="center">Click <a href="login4.html">Here</a> to register</p>
+		<p align="center">Click <a href="registrationPage.php">Here</a> to register</p>
       </form>
 	  
 	  <div class="space"> </div>
