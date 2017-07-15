@@ -83,6 +83,12 @@ CREATE TABLE follows (
     PRIMARY KEY (user_id, event_id)
 );
 
+create table In_RSO(
+user_id INT,
+rso_id INT,
+rel_id INT(11) NOT NULL auto_increment,
+PRIMARY KEY (rel_id));
+
 INSERT INTO rso (name, email, admin) VALUES ("KnightsMMA","dhellkamp@knights.ucf.edu", 1);
 INSERT INTO rso (name, email, admin) VALUES ("Hack@UCF","dhellkamp@knights.ucf.edu", 1);
 INSERT INTO rso (name, email, admin) VALUES ("TechKnights","dhellkamp@knights.ucf.edu", 1);
