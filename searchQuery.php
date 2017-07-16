@@ -54,6 +54,9 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
+	.comments{
+		padding: 0px 40px;
+	}
 
     </style>
 
@@ -150,13 +153,16 @@ echo "Connected successfully";
 		$result2 = $conn->query("SELECT c.text, r.rating FROM comments c, ratings r, events e WHERE e.event_id = c.event_id AND r.comment_id = c.comment_id AND e.event_id = '$event_id'");
 				while($row2 = mysqli_fetch_array($result2))
 				{
+					
 					$text = $row2['text'];
 					$rating = $row2['rating'];
+					echo"<div class='comments'>";
 					echo "<p><strong>Comment :</strong></p>";
 					echo "<p>" . $text . "<br></p>"; 
 					echo"<strong>Rating: </strong>" . $rating . "</p>";
 					echo "<a href=/>Remove Comment</a>";	
 					echo "<br></br>";
+					echo"</div>";
 				}
 		echo "<br></br>";
 		}
